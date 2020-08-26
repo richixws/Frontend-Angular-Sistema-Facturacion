@@ -8,6 +8,7 @@ import { Cliente } from './cliente';
 export class FormComponent implements OnInit {
 
   private cliente: Cliente=new Cliente()
+  private titulo: string ="Crear Cliente"
 
   constructor() { }
 
@@ -18,6 +19,7 @@ export class FormComponent implements OnInit {
   public create():void{
 
     console.log("Clicked!")
+    console.log(this.cliente)
     
 
   }
