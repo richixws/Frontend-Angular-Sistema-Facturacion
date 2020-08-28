@@ -13,6 +13,7 @@ export class FormComponent implements OnInit {
   public cliente: Cliente=new Cliente()
   public titulo: string ="Crear Cliente"
 
+
   constructor(private clienteService: ClienteService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -27,7 +28,7 @@ export class FormComponent implements OnInit {
      
     let id =params['id']
     if(id){
-      this.clienteService.getCliente(id).subscribe((cliente) => cliente=cliente)
+      this.clienteService.getCliente(id).subscribe((cliente) => this.cliente=cliente)
     }
   
    })
@@ -54,13 +55,9 @@ export class FormComponent implements OnInit {
             swal.fire('Cliente Actualizado', ` Cliente ${cliente.nombre} actualizado con exito !`,'success')
 
        }
-
-
     )
-
-
-
   }
+  
 
 
 
