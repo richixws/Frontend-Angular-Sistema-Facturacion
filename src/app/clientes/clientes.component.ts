@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente} from './cliente';
 import { ClienteService} from './cliente.service'
-import swal from  'sweetalert2'
+import Swal from  'sweetalert2'
 
 //componnet controlador de cliente
 
@@ -26,6 +26,15 @@ export class ClientesComponent implements OnInit {
 
   delete(cliente:Cliente):void{
 
+    const swal = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+  
    
     swal.fire({
       title: 'esta seguro?',
