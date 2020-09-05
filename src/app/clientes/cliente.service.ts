@@ -37,8 +37,10 @@ export class ClienteService {
 
   create(cliente : Cliente) : Observable<Cliente>{
 
-     return this.http.post<Cliente>(this.urlEndPoint,cliente,{headers:this.httpHeaders}).pipe(
+     return this.http.post(this.urlEndPoint,cliente,{headers:this.httpHeaders}).pipe(
         
+       map( (response:any)=> response.cliente as Cliente ),
+       
        catchError(e=>{
            console.error(e.error.mensaje);
            swal.fire('error al crear',e.error.mensaje,'error');
@@ -67,9 +69,9 @@ export class ClienteService {
 
   }
    
-  update(cliente: Cliente) : Observable<Cliente>{
+  update(cliente: Cliente) : Observable<any>{
 
-      return this.http.put<Cliente>(`${this.urlEndPoint}/${cliente.id}`, cliente,{headers:this.httpHeaders}).pipe(
+      return this.http.put<any>(`${this.urlEndPoint}/${cliente.id}`, cliente,{headers:this.httpHeaders}).pipe(
           
         catchError(e =>{
                
