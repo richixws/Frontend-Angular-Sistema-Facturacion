@@ -1,6 +1,7 @@
-<ul class="alert alert-danger" *ngIf="errores?.length>0">
-    <li *ngFor="let err of errores"></li>
-    {{err}}
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
 </ul>
 
 
@@ -33,7 +34,7 @@
                 <label for="" class="col-form-label col-sm-2">Apellido</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido" #apellido="ngModel">
-                    <!-- required -->>
+                    <!-- required -->
                     <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
                         <div *ngIf="apellido.errors.required">
                             nombre es requerido
