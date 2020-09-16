@@ -24,33 +24,35 @@ export class ClienteService {
   constructor(private http:HttpClient, private router:Router) { }
 
   //metodo getClientes para devolver el listado de cliente de json.
-  getClientes():Observable<Cliente[]>{
+  getClientes(page:number):Observable<any>{
 
-    return this.http.get(this.urlEndPoint).pipe(
+    return this.http.get(this.urlEndPoint+'/page/'+page).pipe(
 
-     tap(response => {
-        let clientes=response as Cliente[];
-        console.log('ClienteService: tap 1')
-        clientes.forEach( cliente => {
+     tap( (response:any) => {
+  //      let clientes=response as Cliente[];
+        console.log('ClienteService: tap 1');
+        (response.content as Cliente[]).forEach( cliente => {
           console.log(cliente.nombre)
         }) 
 
      }),
 
-      map((response) =>{
-      let clientes=  response as Cliente[];
+      map((response:any) =>{
+     // let clientes=  response as Cliente[];
 
-      return clientes.map( cliente=>{
+          (response.content as Cliente[]).map( cliente=>{
           cliente.nombre=cliente.nombre.toUpperCase();
-          let datePipe=new DatePipe('es');
+         // let datePipe=new DatePipe('es');
         //  cliente.createAt=datePipe.transform(cliente.createAt,'EEEE dd, MMMM yyyy');
         //  cliente.createAt=formatDate(cliente.createAt,'dd/MM/yyyy','en-US');
           return cliente;
       });
+      return response;
+
       } ),
       tap(response => {
-        console.log('ClienteService: tap 2')
-        response.forEach( cliente => {
+        console.log('ClienteService: tap 2');
+        (response.content as Cliente[]).forEach( cliente => {
           console.log(cliente.nombre)
         }) 
 
