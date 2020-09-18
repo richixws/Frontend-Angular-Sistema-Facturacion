@@ -20,6 +20,7 @@ registerLocaleData(localeES,'es');
 const routes: Routes = [
   { path: '', redirectTo: '/clientes', pathMatch:'full' },
   { path: 'clientes', component:ClientesComponent },
+  { path: 'clientes/page/:page', component:ClientesComponent },
   { path: 'clientes/form', component:FormComponent},
   { path: 'clientes/form/:id', component:FormComponent}
   
