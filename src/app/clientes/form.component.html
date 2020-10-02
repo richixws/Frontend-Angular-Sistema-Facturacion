@@ -63,9 +63,18 @@
             </div>
 
             <div class="form-group row">
-                <div class="col-ms-6">
-                    <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!cliente.id else elseBlock" [disabled]="!clienteForm.form.valid">Crear</button>
+                <label for="createAt" class="col-form-label col-sm-2">fecha</label>
+                <div class="col-sm-6">
 
+                    <input [matDatepicker]="mipicker" class="form-control" [(ngModel)]="cliente.createAt" name="createAt" style="display: inline; width: 300px;">
+                    <mat-datepicker-toggle [for]="mipicker"></mat-datepicker-toggle>
+                    <mat-datepicker #mipicker></mat-datepicker>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-ms-6">
+                    <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!cliente.id else elseBlock" [disabled]="!clienteForm.form.valid">Crear</button> -
                     <ng-template #elseBlock>
                         <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!clienteForm.form.valid">Editar</button>
                     </ng-template>
