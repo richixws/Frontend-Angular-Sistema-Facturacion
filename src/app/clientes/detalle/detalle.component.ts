@@ -15,7 +15,7 @@ export class DetalleComponent implements OnInit {
 
   cliente:Cliente;
   titulo: string="detalle de cliente";
-  private fotoSeleccionada: File;
+  public fotoSeleccionada: File;
 
   constructor(private clienteService:ClienteService, private activatedRoute:ActivatedRoute ) { }
 
@@ -39,18 +39,24 @@ export class DetalleComponent implements OnInit {
 
      this.fotoSeleccionada=event.target.files[0];
      console.log(this.fotoSeleccionada);
+     if(this.fotoSeleccionada.type.indexOf('image') < 0){
+       swal.fire('Error seleccionar imagen','El archivo deve de  ser de tipo image','error');
+     }
 
    }
 
    subirFoto(){
 
+      if(!this.fotoSeleccionada){
+        swal.fire('Error Upload: ', 'Deve seleccionar una foto','error');
+      }else{
      this.clienteService.subirFoto(this.fotoSeleccionada,this.cliente.id)
      .subscribe(cliente =>{
         
          this.cliente=cliente;
          swal.fire('la foto se a subido correctamente!',`la foto se a subido con exito: ${this.cliente.foto}`,'success');
      })
-
+    }
    }
 
 
