@@ -2,15 +2,37 @@
     <div class="card-header">{{titulo}}</div>
 
     <div class="card-body">
+        <div class="container">
+            <div class="row">
 
-        <div class="input-group">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                <label class="custom-file-label" for="inputGroupFile04">subir foto</label>
-            </div>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+                <div class="col-sm">
+
+                    <ul class="list-group texç">
+                        <li class="list-group-item">{{cliente.nombre}}</li>
+                        <li class="list-group-item">{{cliente.apellido}}</li>
+                        <li class="list-group-item">{{cliente.email}}</li>
+                        <li class="list-group-item">{{cliente.createAt | date:"fullDate"}}</li>
+                    </ul>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                            <label class="custom-file-label" for="inputGroupFile04">seleccionar foto</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">subir</button>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="col-sm">
+
+
+                </div>
+
             </div>
         </div>
+
     </div>
 </div>
