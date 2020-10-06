@@ -3,7 +3,7 @@ import { formatDate, DatePipe, registerLocaleData} from '@angular/common';
 import {CLIENTES} from './clientes.json';
 import { Cliente} from './cliente';
 import { Observable,of, throwError} from 'rxjs';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {map, catchError,tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -136,19 +136,17 @@ export class ClienteService {
 
   }
 
-  subirFoto(archivo: File, id): Observable<Cliente>{
+  subirFoto(archivo: File, id): Observable<HttpEvent<{}>>{
 
     let formData=new  FormData();
     formData.append("archivo",archivo);
     formData.append("id",id);
-    return this.http.post(`${this.urlEndPoint}/upload`,formData).pipe(
-      map((response:any) => response.cliente as Cliente),
-      catchError( e =>{
-          console.error(e.error.mensaje)
-          swal.fire(e.error.mensaje, e.error.error, 'error')
-          return throwError(e)
-      })
-    );
+   
+    const req = new HttpRequest('POST',`${this.urlEndPoint}/upload`,formData, {
+      reportProgress: true
+    });
+
+    return this.http.request(req);
 
   }
 
