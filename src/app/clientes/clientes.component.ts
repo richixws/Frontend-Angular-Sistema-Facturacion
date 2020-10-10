@@ -10,11 +10,13 @@ import {  ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html'
+  
 })
 export class ClientesComponent implements OnInit {
 
   clientes:Cliente[];
   paginador:any;
+  clienteSeleccionado:Cliente;
 
   //inyeccion de dependencia ClienteService
   constructor(private clienteService: ClienteService,private activatedRoute: ActivatedRoute) { }
@@ -94,5 +96,10 @@ export class ClientesComponent implements OnInit {
 
   }
 
+  abrirModal(cliente: Cliente){
+
+    this.clienteSeleccionado=cliente;
+
+  }
 
 }
