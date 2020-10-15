@@ -22,6 +22,7 @@ export class FormComponent implements OnInit {
      
     this.cargarCliente()
 
+
   }
 
    cargarCliente(): void{
@@ -33,7 +34,9 @@ export class FormComponent implements OnInit {
       this.clienteService.getCliente(id).subscribe((cliente) => this.cliente=cliente)
     }
   
-   })
+   });
+
+   this.clienteService.getRegiones().subscribe(regiones=>this.cliente=this.cliente);
 
    }
 
