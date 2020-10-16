@@ -7,6 +7,7 @@ import { HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/
 import {map, catchError,tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Region } from './Region';
 
 
 
@@ -22,6 +23,13 @@ export class ClienteService {
   
 
   constructor(private http:HttpClient, private router:Router) { }
+
+  getRegiones():Observable<Region[]>{
+
+       return  this.http.get<Region[]>(this.urlEndPoint+'/regiones');
+
+
+  }
 
   //metodo getClientes para devolver el listado de cliente de json.
   getClientes(page:number):Observable<any>{
