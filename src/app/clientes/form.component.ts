@@ -21,26 +21,34 @@ export class FormComponent implements OnInit {
   constructor(private clienteService: ClienteService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-     
-    this.cargarCliente()
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      let id = +params.get('id');
+      if (id) {
+        this.clienteService.getCliente(id).subscribe((cliente) => this.cliente = cliente);
+      }
+    });
+
+    this.clienteService.getRegiones().subscribe(regiones => this.regiones=regiones);
+   // this.cargarCliente()
 
 
   }
 
-   cargarCliente(): void{
+  //  cargarCliente(): void{
 
-   this.activatedRoute.params.subscribe(params => {
+  //  this.activatedRoute.params.subscribe(params => {
      
-    let id =params['id']
-    if(id){
-      this.clienteService.getCliente(id).subscribe((cliente) => this.cliente=cliente)
-    }
+  //   let id =params['id']
+  //   if(id){
+  //     this.clienteService.getCliente(id).subscribe((cliente) => this.cliente=cliente)
+  //   }
   
-   });
+  //  });
 
-   this.clienteService.getRegiones().subscribe(regiones => this.regiones=regiones);
+  //  this.clienteService.getRegiones().subscribe(regiones => this.regiones=regiones);
 
-   }
+  //  } 
 
    create():void{
 
@@ -81,7 +89,11 @@ export class FormComponent implements OnInit {
 
   compararRegion(o1:Region,o2:Region):boolean{
 
-    return o1 === null || o2=== null? false: o1.id===o2.id;
+    if (o1 === undefined && o2 === undefined) {
+      
+      return true;
+    }
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false: o1.id === o2.id;
 
   }
   
